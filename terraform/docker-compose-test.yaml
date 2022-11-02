@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  nginx:
+    image: 644435390668.dkr.ecr.ap-northeast-3.amazonaws.com/jenkins-jz-pipe:nginxted-test
+    networks:
+      - ted_net
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - app
+
+  app:
+      image: 644435390668.dkr.ecr.ap-northeast-3.amazonaws.com/jenkins-jz-pipe:tedapp-test
+      networks:
+        - ted_net
+      restart: always
+      ports:
+      - "9191:9191"
+
+networks:
+  ted_net:
+    driver: bridge
+
